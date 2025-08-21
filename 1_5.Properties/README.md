@@ -58,6 +58,6 @@ function App() {
 }
 ```
 ### More information is here: https://react.dev/learn/passing-props-to-a-component
-✅ Here:
 
-username and age are both passed as props.
+## ✅ Here:
+### - username and age are both passed as props.
