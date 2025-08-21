@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Props and Components
 
 ## Available Scripts
 
@@ -11,13 +9,7 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -27,44 +19,66 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Components in React
+### A component is a reusable, independent piece of UI in React.
+ - They can be functional components (using functions) or class components (older style, less common now).
+ - Components return JSX (UI markup).
+ - Components can accept props to become dynamic.
 
-### `npm run eject`
+### 👉 Example of a functional component:
+```
+function Header() {
+  return <h1>Welcome to my app!</h1>;
+}
+```
+## Props in React
+### Props (properties) let you pass data from parent to child components.
+ - They work like arguments to a function.
+ - They are read-only (cannot be modified by the child).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 👉 Example:
+```
+function Greeting(props) {
+  return <h2>Hello, {props.name}!</h2>;
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+function App() {
+  return (
+    <div>
+      <Greeting name="Artem" />
+      <Greeting name="Malala" />
+    </div>
+  );
+}
+```
+### Here:
+ - Greeting is a component.
+ - name is a prop.
+ - App passes different props to Greeting.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Combining Components + Props
+### Components become powerful when you use them together.
+```
+function UserCard({ name, role }) {
+  return (
+    <div className="card">
+      <h2>{name}</h2>
+      <p>Role: {role}</p>
+    </div>
+  );
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+function App() {
+  return (
+    <div>
+      <UserCard name="Artem" role="Chef" />
+      <UserCard name="Malala" role="Inspiration" />
+    </div>
+  );
+}
+```
+### ✅ Here:
+ - UserCard is a reusable component.
+ - We pass name and role props to customize each card.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### More information is here: https://react.dev/learn/passing-props-to-a-component
