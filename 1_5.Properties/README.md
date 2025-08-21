@@ -57,7 +57,8 @@ function App() {
   return <Profile username="Malala" age={27} />;
 }
 ```
-### More information is here: https://react.dev/learn/passing-props-to-a-component
-
 ## ✅ Here:
 ### - username and age are both passed as props.
+
+### More information is here: https://react.dev/learn/passing-props-to-a-component
+
