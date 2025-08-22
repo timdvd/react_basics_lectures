@@ -80,3 +80,5 @@ If you keep the same key, the state is preserved.
 ### - State is preserved if the component stays in the tree at the same position.
 ### - State is reset if the component unmounts, or if its key changes.
 ### - Use keys deliberately to control whether state should be kept or reset.
+
+### More information is here: https://react.dev/learn/preserving-and-resetting-state
