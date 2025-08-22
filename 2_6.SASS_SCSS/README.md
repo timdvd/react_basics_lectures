@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SASS and SCSS
 
 ## Available Scripts
 
@@ -8,16 +6,11 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -27,44 +20,69 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## What is Sass / SCSS?
+ - Sass = Syntactically Awesome Style Sheets → a CSS preprocessor.
+ - It adds variables, nesting, mixins, functions, and more to regular CSS.
+ - SCSS is just a newer syntax of Sass that looks more like standard CSS.
+```
+👉 Example:
 
-### `npm run eject`
+// SCSS (recommended syntax)
+$primary-color: #3498db;
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+.button {
+  background: $primary-color;
+  color: white;
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  &:hover {
+    background: darken($primary-color, 10%);
+  }
+}
+```
+### This compiles down to normal CSS:
+```
+.button {
+  background: #3498db;
+  color: white;
+}
+.button:hover {
+  background: #2980b9;
+}
+```
+## Using Sass/SCSS in React
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1) Install Sass
+```
+npm install sass
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2) Create SCSS file
+```
+/* styles/Button.scss */
+$primary: #ff5733;
 
-## Learn More
+.my-button {
+  background: $primary;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3) Import into Component
+```
+import './styles/Button.scss';
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+function Button({ text }) {
+  return <button className="my-button">{text}</button>;
+}
+```
 
-### Code Splitting
+### ✅ React will compile SCSS → CSS automatically (via the sass package).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Benefits of Sass/SCSS in React
+ - Variables → Reuse values ($primary-color).
+ - Nesting → Cleaner styles for components.
+ - Mixins → Reusable style snippets.
+ - Partials & Imports → Split SCSS into smaller files.
+ - Functions → Like darken(), lighten(), etc.
