@@ -20,12 +20,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-🔹 1. Plain CSS (Global Styles)
-
-You can use regular CSS files just like in plain HTML.
+## 1. Plain CSS (Global Styles)
+ - You can use regular CSS files just like in plain HTML.
 
 👉 Example:
-
+```
 /* App.css */
 .container {
   padding: 20px;
@@ -37,16 +36,16 @@ import './App.css';
 function App() {
   return <div className="container">Hello React</div>;
 }
+```
 
+### ✅ Simple, but all styles are global (can cause conflicts).
 
-✅ Simple, but all styles are global (can cause conflicts).
+## 2. Inline Styles
 
-🔹 2. Inline Styles
-
-You can pass a style object directly to an element.
+ - You can pass a style object directly to an element.
 
 Keys use camelCase instead of -.
-
+```
 function Button() {
   return (
     <button style={{ backgroundColor: "blue", color: "white", padding: "10px" }}>
@@ -54,7 +53,7 @@ function Button() {
     </button>
   );
 }
-
+```
 
 ✅ Good for dynamic styles, but can get messy.
 
