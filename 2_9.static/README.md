@@ -22,7 +22,7 @@ Your app is ready to be deployed!
 
 ## Static Methods in React Classes (Older React)
 
-### In class components, you can define static methods or properties.
+## In class components, you can define static methods or properties.
 ### The most common is static defaultProps or static propTypes.
 
 👉 Example (class component):
