@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Immutability
 
 ## Available Scripts
 
@@ -8,16 +6,11 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -27,44 +20,58 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## What is Immutability?
+ - Immutable means “unchangeable.”
+ - In React, you don’t modify state directly — instead, you create a new copy of the state with the updated value.
 
-### `npm run eject`
+### 👉 Why?
+ - React relies on detecting changes to re-render components.
+ - If you mutate state directly, React may not notice and won’t update the UI.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### ❌ Mutating State (Wrong Way)
+```
+const [numbers, setNumbers] = useState([1, 2, 3]);
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+function addNumber() {
+  numbers.push(4); // ❌ directly modifying state
+  setNumbers(numbers); // React may not re-render
+}
+```
+### ✅ Updating State Immutably (Correct Way)
+```
+function addNumber() {
+  setNumbers([...numbers, 4]); // create a new array
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Here:
+ - ...numbers copies old values.
+ - [...numbers, 4] creates a new array.
+ - React sees it’s a new object → re-renders.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Immutability with Objects
+```
+const [user, setUser] = useState({ name: "Artem", age: 30 });
+```
+### ❌ Wrong: user.age = 31;
+```
+setUser({ ...user, age: 31 }); // ✅ Correct
+```
+## Why Immutability Matters
+1) Re-rendering → React can detect changes properly.
+2) Predictability → Old state is not lost (useful for debugging, undo/redo features).
+3) Pure functions → State updates are easier to test.
 
-## Learn More
+### Common Patterns
+1) Arrays
+ - Add: setItems([...items, newItem])
+ - Remove: setItems(items.filter(item => item.id !== id))
+ - Update: setItems(items.map(item => item.id === id ? {...item, name: "Updated"} : item))
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2) Objects
+ - Update field: setUser({...user, age: user.age + 1})
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### ✅ Key Idea:
+ - In React, never mutate state directly. Always create a new copy when updating arrays or objects.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### More information is here: https://react.dev/learn/updating-objects-in-state
