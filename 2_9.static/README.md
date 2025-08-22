@@ -40,6 +40,6 @@ class Welcome extends React.Component {
 }
 ```
 
-## ✅ defaultProps is static because it belongs to the class itself, not to an instance.
+### ✅ defaultProps is static because it belongs to the class itself, not to an instance.
 
 ### More information is here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static
