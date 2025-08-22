@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Responding to Events
 
 ## Available Scripts
 
@@ -8,63 +6,96 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## What Are Events in React?
+### - Events are user interactions like clicks, typing, submitting a form, etc.
+### - In React, events work very similarly to HTML DOM events, but with some differences.
 
-### `npm run eject`
+## Differences from HTML Events
+1) React uses camelCase instead of lowercase:
+```
+<button onClick={handleClick}>Click Me</button>
+```
+ - (not onclick like in plain HTML).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2) You pass a function reference, not a string:
+```
+<button onClick={() => alert("Clicked!")}>Click</button>
+```
+ - (not onClick="alert('Clicked!')").
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Example: Handling a Click
+```
+function Button() {
+  function handleClick() {
+    alert("Button was clicked!");
+  }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Example: Using State + Events
+```
+import { useState } from "react";
 
-## Learn More
+function Counter() {
+  const [count, setCount] = useState(0);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  function handleClick() {
+    setCount(count + 1);
+  }
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  return (
+    <button onClick={handleClick}>
+      Count: {count}
+    </button>
+  );
+}
+```
 
-### Code Splitting
+### ✅ When the button is clicked:
+ - handleClick runs → updates state.
+ - React re-renders → UI updates.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Example: Passing Arguments to Event Handlers
+```
+function GreetingButton({ name }) {
+  function sayHello() {
+    alert(`Hello, ${name}!`);
+  }
 
-### Analyzing the Bundle Size
+  return <button onClick={sayHello}>Greet {name}</button>;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+function App() {
+  return (
+    <>
+      <GreetingButton name="Artem" />
+      <GreetingButton name="Malala" />
+    </>
+  );
+}
+```
+### Common React Events
+ - onClick
+ - onChange (for input fields)
+ - onSubmit (for forms)
+ - onMouseEnter / onMouseLeave
+ - onKeyDown / onKeyUp
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### More information is here: https://react.dev/learn/responding-to-events
