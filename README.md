@@ -16,6 +16,9 @@ This project helps me reinforce what I’ve learned by actively coding along wit
  - React
  - SASS
  - SCSS
+ - JavaScript ES6+
+ - HTML
+ - CSS
 
 ### Installation
 Clone the repository: git clone https://github.com/timdvd/react_basics_lectures.git
